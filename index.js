@@ -14,8 +14,11 @@ async function run() {
     try {
         const cCollection = client.db('Siamvi').collection('comments');
         app.get('/',(req,res)=>{
-            res.sendFile(__dirname+'/web.html')
+            res.send('server in maintenance')
         })
+        // app.get('/d',(req,res)=>{
+        //     res.sendFile(__dirname+'/web.html')
+        // })
         app.post('/api/v1/comments',async (req,res)=>{
             const result = await cCollection.insertOne(req.body)
             res.send(result)
