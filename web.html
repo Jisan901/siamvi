@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        
+        .comments{
+            display: flex;
+            flex-direction: column;
+        }
+        .comment{
+            background-color: transparent;
+            border: 1px solid #000;
+            text-align: left;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .comment h4{
+            color: tomato;
+            font-size: 1.2rem;
+            width: 100%;
+            border-bottom: 1px solid tomato;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>comments</h1>
+    <div class="comments">
+        
+    </div>
+    <script type="text/javascript" charset="utf-8">
+        const url = '/api/v1/comments';
+function load_data() {
+    fetch(url)
+.then(res=>res.json())
+.then(data => {
+    document.querySelector(".comments").innerHTML=''
+    data.forEach((dat)=>{
+        
+    document.querySelector(".comments").innerHTML+=`
+    <div class="comment">
+        <h4 class="title">${dat.title}</h4>
+                <p class="desc">
+                    ${dat.desc}
+                </p>
+                <a href="/delete/${dat.title}">Delete</a>
+    </div>`
+    })
+})
+}
+load_data()
+    </script>
+</body>
+</html>
